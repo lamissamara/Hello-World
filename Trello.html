@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trello- To-Do List</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="row">
+            <div class="col-4" v-for="list in lists" :key="list.id">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        {{ list.title }}
+                    </div>
+                    <div class="card-body">
+                        <div v-for="card in list.cards" :key="card.id" class="card mb-2">
+                            <div class="card-body">
+                                {{ card.title }}
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" v-model="newCardTitle" @keyup.enter="addCard(list.id)">
+                            <button class="btn btn-outline-primary" type="button" @click="addCard(list.id)">Add Card</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" v-model="newListTitle" @keyup.enter="addList">
+            <button class="btn btn-outline-success" type="button" @click="addList">Add List</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    lists: [
+                        {
+                            id: 1,
+                            title: 'To Do',
+                            cards: [
+                                { id: 1, title: 'Finish project' },
+                            ]
+                        },
+                        {
+                            id: 2,
+                            title: 'In Progress',
+                            cards: [
+                                { id: 3, title: 'Review code' },
+                            ]
+                        },
+                        {
+                            id: 3,
+                            title: 'Done',
+                            cards: [
+                                { id: 4, title: 'Submit report' },
+                            ]
+                        },
+                    ],
+                    newCardTitle: '',
+                    newListTitle: ''
+                };
+            },
+            methods: {
+                addCard(listId) {
+                    const list = this.lists.find(list => list.id === listId);
+                    if (list && this.newCardTitle.trim() !== '') {
+                        list.cards.push({
+                            id: Date.now(),
+                            title: this.newCardTitle.trim()
+                        });
+                        this.newCardTitle = '';
+                    }
+                },
+                addList() {
+                    if (this.newListTitle.trim() !== '') {
+                        this.lists.push({
+                            id: Date.now(),
+                            title: this.newListTitle.trim(),
+                            cards: []
+                        });
+                        this.newListTitle = '';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

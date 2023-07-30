@@ -1,0 +1,47 @@
+body {
+    padding: 20px;
+}
+
+/* Style for the Trello-like cards */
+.card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.card-header {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 10px;
+}
+
+/* Style for the "Add Card" input field */
+.input-group {
+    margin-bottom: 20px;
+}
+
+    .input-group input[type="text"] {
+        border-radius: 4px;
+    }
+
+    .input-group button {
+        border-radius: 4px;
+    }
+
+    /* Style for the "Add List" input field */
+    .input-group:last-child {
+        margin-bottom: 0;
+    }
+
+/* Custom background color for the body */
+body {
+    background-color: #f5f5f5;
+}
